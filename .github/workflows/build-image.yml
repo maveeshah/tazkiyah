@@ -49,3 +49,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          # No SLSA attestation manifests. They make buildx do a referrers
+          # read on the target package, which fails with
+          # `permission_denied: read_package` on the first push that has to
+          # create the package. Nothing here consumes provenance/SBOM.
+          provenance: false
+          sbom: false
