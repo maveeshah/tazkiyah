@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Tazkiyah",
+    "slug": "tazkiyah",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "tazkiyah",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f172a"
+      },
+      "package": "app.tazkiyah.finance"
+    },
+    "ios": {
+      "bundleIdentifier": "app.tazkiyah.finance",
+      "supportsTablet": true
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#0f172a"
+        }
+      ]
+    ]
+  }
+}
