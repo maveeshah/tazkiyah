@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@tazkiyah/web", "dev"],
+      "port": 5173,
+      "env": { "VITE_API_PROXY_TARGET": "http://localhost:8010" }
+    }
+  ]
+}

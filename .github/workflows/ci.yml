@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend (type-check, lint, web build, mobile bundle)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Type-check all workspaces
+        run: pnpm run type-check
+
+      - name: Lint frontend (eslint — the API's ruff runs in the backend job)
+        run: npx turbo run lint --filter='!@tazkiyah/api'
+
+      - name: Build web
+        run: pnpm --filter @tazkiyah/web build
+
+      - name: Mobile — expo-doctor
+        working-directory: apps/mobile
+        run: npx --yes expo-doctor@1
+
+      - name: Mobile — export iOS bundle
+        run: pnpm --filter @tazkiyah/mobile build
+
+  backend:
+    name: Backend (ruff, pytest, migrations)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: tazkiyah_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      POSTGRES_SERVER: localhost
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tazkiyah_db
+      POSTGRES_TEST_DB: tazkiyah_test_db
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install (pinned)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.lock
+          pip install -e . --no-deps
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Migrations apply cleanly
+        run: alembic upgrade head
+
+      - name: Model ↔ migration parity
+        run: alembic check
+
+      - name: Tests
+        run: pytest -q
