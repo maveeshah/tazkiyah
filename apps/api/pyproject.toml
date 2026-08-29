@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tazkiyah-api"
+version = "1.0.0"
+description = "Tazkiyah Daily Finance & Wealth OS API"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.6.0",
+    "sqlalchemy>=2.0.36",
+    "asyncpg>=0.30.0",
+    "psycopg2-binary>=2.9.10",
+    "alembic>=1.14.0",
+    "redis>=5.2.0",
+    "python-dotenv>=1.0.1",
+    "httpx>=0.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.21",
+    "pytest-cov>=4.1",
+    "httpx>=0.25",
+    "ruff>=0.16",
+    "pip-tools>=7.4",
+]
+
+# requirements.lock is the pinned transitive closure of the above, regenerated with:
+#   pip-compile --extra dev --strip-extras --output-file=requirements.lock pyproject.toml
+# CI and reproducible local setups install from the lock; `pip install -e ".[dev]"`
+# still works for quick iteration.
+
+[tool.setuptools]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# Baseline: real-bug rules only (pyflakes + syntax). Style/import-order rules
+# (I, E501, …) are deliberately not enabled yet — tracked as a follow-up.
+select = ["E9", "F"]

@@ -1,0 +1,11 @@
+{
+  "name": "@tazkiyah/api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tazkiyah FastAPI backend — wired into the pnpm/turbo task graph.",
+  "scripts": {
+    "test": "pytest -q",
+    "lint": "ruff check ."
+  },
+  "//": "These shell out to the Python venv. Activate it first for local runs: `source .venv/bin/activate` (CI does this). See ../../README.md."
+}
