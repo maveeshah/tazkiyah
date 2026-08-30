@@ -24,7 +24,11 @@ import type {
   ZBBSummaryResponse,
 } from '../types/api';
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:8000/api/v1';
+// Set EXPO_PUBLIC_API_URL for local dev (e.g. http://localhost:8000/api/v1 or a
+// LAN IP for a device). Release builds fall back to the deployed API.
+const API_BASE_URL =
+  process.env.EXPO_PUBLIC_API_URL ??
+  (__DEV__ ? 'http://localhost:8000/api/v1' : 'https://api.tazkiyah.co/api/v1');
 
 // Simple in-memory store
 let _householdId: string | null = null;
