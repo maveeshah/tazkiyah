@@ -1,0 +1,12 @@
+{
+    "schema_version": 2,
+    "commit": "e82a7ba47d8ef875454ab56bfa095ca82f9395a3",
+    "indexed_at": "2026-09-19T14:47:49Z",
+    "project": "opt-tazkiyah-tazkiyah.co-tazkiyah",
+    "nodes": 2653,
+    "edges": 7176,
+    "original_size": 7208960,
+    "compressed_size": 1312699,
+    "compression_level": 9,
+    "reconcile_basis": "git-clean-head"
+}
