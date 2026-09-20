@@ -189,7 +189,7 @@ export default function BudgetScreen() {
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.accountRow}>
           {accounts.length === 0 ? (
-            <Text style={styles.emptySubText}>No accounts yet — add one to start budgeting.</Text>
+            <Text style={styles.emptySubText}>No accounts yet. Add one to start budgeting.</Text>
           ) : (
             accounts.map(a => (
               <AccountCard key={a.id} name={a.name} balance={a.current_balance} isOverdrawn={a.is_overdrawn} />

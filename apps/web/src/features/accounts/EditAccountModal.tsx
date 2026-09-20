@@ -105,7 +105,7 @@ export const EditAccountModal: React.FC<EditAccountModalProps> = ({
           prefixText="PKR"
           value={balance}
           onChange={(e) => setBalance(e.target.value)}
-          helperText="Editing this is a manual adjustment — it does not create a transaction."
+          helperText="Editing this is a manual adjustment. It does not create a transaction."
         />
         <label className="flex items-center gap-2 text-sm text-slate-300">
           <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />

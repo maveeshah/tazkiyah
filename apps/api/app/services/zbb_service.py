@@ -187,7 +187,7 @@ class ZBBService:
         tx_count = await cls._envelope_tx_count([e.id for e in group.envelopes], db)
         if tx_count:
             raise ConflictError(
-                f"Group has envelopes with {tx_count} transaction(s) — reassign or delete those first."
+                f"Group has envelopes with {tx_count} transaction(s). Reassign or delete those first."
             )
         await db.delete(group)  # envelopes cascade
         await db.commit()
@@ -229,7 +229,7 @@ class ZBBService:
         tx_count = await cls._envelope_tx_count([envelope_id], db)
         if tx_count:
             raise ConflictError(
-                f"Envelope has {tx_count} transaction(s) — delete or reassign them before deleting the envelope."
+                f"Envelope has {tx_count} transaction(s). Delete or reassign them before deleting the envelope."
             )
         await db.delete(envelope)
         await db.commit()

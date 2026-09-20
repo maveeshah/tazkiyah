@@ -114,7 +114,7 @@ export const EditGoalModal: React.FC<EditGoalModalProps> = ({ isOpen, onClose, g
           value={currentBalance}
           onChange={(e) => setCurrentBalance(e.target.value)}
           disabled={isLinked}
-          helperText={isLinked ? 'Read-only — tracks the linked envelope.' : 'Add or adjust the amount saved so far.'}
+          helperText={isLinked ? 'Read-only: tracks the linked envelope.' : 'Add or adjust the amount saved so far.'}
         />
 
         {error && (

@@ -40,9 +40,9 @@ export function EmergencyRunway({ netLiquidWorth, envelopeGroups, zbbSummary }: 
 
   const status = useMemo(() => {
     if (runwayMonths >= 6) return { label: 'Halal Freedom target reached', color: '#16a34a' };
-    if (runwayMonths >= 3) return { label: 'Low risk — on track to 6 months', color: '#0ea5e9' };
-    if (runwayMonths >= 1) return { label: 'Moderate risk — build the cushion', color: '#d97706' };
-    return { label: 'High fragility — under 1 month of reserves', color: '#dc2626' };
+    if (runwayMonths >= 3) return { label: 'Low risk: on track to 6 months', color: '#0ea5e9' };
+    if (runwayMonths >= 1) return { label: 'Moderate risk: build the cushion', color: '#d97706' };
+    return { label: 'High fragility: under 1 month of reserves', color: '#dc2626' };
   }, [runwayMonths]);
 
   const milestones = [
