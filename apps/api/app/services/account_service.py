@@ -77,7 +77,7 @@ class AccountService:
         )
         if tx_count:
             raise ConflictError(
-                f"Account has {tx_count} transaction(s) — set is_active=false to hide it instead of deleting."
+                f"Account has {tx_count} transaction(s). Set is_active=false to hide it instead of deleting."
             )
         await db.delete(account)
         await db.commit()

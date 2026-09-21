@@ -284,7 +284,7 @@ export default function LogScreen() {
         setNlResult(`✅ Logged Rs ${result.total_amount?.toLocaleString()} successfully`);
         setText('');
       } else if (result.status === 'prompted_for_account') {
-        setNlResult('💬 Multiple accounts found — please specify (e.g. "from cash" or "from meezan")');
+        setNlResult('💬 Multiple accounts found. Please specify (e.g. "from cash" or "from meezan")');
       } else {
         setNlResult(`ℹ️ Status: ${result.status}`);
       }

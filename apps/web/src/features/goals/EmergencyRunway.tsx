@@ -152,9 +152,9 @@ export const EmergencyRunway: React.FC<EmergencyRunwayProps> = ({
   const statusInfo = useMemo(() => {
     if (runwayMonths >= 12) {
       return {
-        label: 'Fortress Level — Zero Solvency Risk',
+        label: 'Fortress Level: Zero Solvency Risk',
         variant: 'success' as const,
-        description: 'You have over 1 year of liquid runway. Exceptional financial fortitude.',
+        description: 'You have over 1 year of liquid runway.',
         icon: ShieldCheck,
       };
     }

@@ -115,7 +115,7 @@ export const UsersView: React.FC<{ addToast: ToastFn }> = ({ addToast }) => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => void guard(() => logout(), 'Logged out — back on the demo session', 'Logout failed')}
+              onClick={() => void guard(() => logout(), 'Logged out. Back on the demo session.', 'Logout failed')}
             >
               Log out
             </Button>
